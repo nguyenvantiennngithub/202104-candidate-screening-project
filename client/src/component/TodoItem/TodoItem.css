@@ -1,0 +1,30 @@
+.todo-container {
+    display: flex;
+    align-items: flex-start;
+    border-top: 1px solid #363535;
+    padding-bottom: 8px;
+}
+.todo-checkBox {
+    color: #d8d8d8 !important;
+}
+.todo-content {
+    margin-top: 12px;
+    margin-bottom: 0;
+}
+.todo-container.completed .todo-content {
+    color: #a18888 !important;
+}
+
+.completed {
+    text-decoration: line-through;
+}
+
+.todo-date {
+    color: #d8d8d8;
+    font-size: 14px;
+    margin: 8px 0 0 0;
+}
+
+.todo-date.dueDate {
+    color: #d93025;
+}

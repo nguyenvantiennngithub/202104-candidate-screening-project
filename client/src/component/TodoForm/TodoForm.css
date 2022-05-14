@@ -1,0 +1,78 @@
+.todoForm {
+    margin-top: 16px;
+}
+.todoForm-content {
+    border: 1px solid #363535;
+    padding: 16px;
+    border-radius: 16px;
+}
+
+.todoForm-content-input {
+    background-color: #1f1f1f;
+    max-width: 100%;
+    width: 100%;
+    min-height: 100px;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    color: #d8d8d8;
+}
+.todoForm-addion-dueDate {
+    border: 1px solid #363535;
+    padding: 8px 16px;
+    border-radius: 8px;
+    background-color: #1f1f1f;
+    color: #d8d8d8;
+    font-weight: 600;
+}
+
+.todoForm-addion-dueDate:hover {
+    cursor: pointer;
+    background-color: #575353;
+}
+.todoForm-action {
+    margin-top: 12px;
+}
+.todoForm-date input,
+.todoForm-date label {
+    color: #d8d8d8 !important;
+}
+.todoForm-date fieldset {
+    border-color: #d8d8d8;
+}
+
+.todoForm-date
+    .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root:hover
+    .MuiOutlinedInput-notchedOutline {
+    border-color: #d8d8d8 !important;
+}
+
+.todoForm-date.isDueDate
+    .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root:hover
+    .MuiOutlinedInput-notchedOutline {
+    border-color: #d93025 !important;
+}
+
+.todoForm-date.isDueDate fieldset {
+    border-color: #d93025;
+}
+.todoForm-messageError {
+    color: red;
+    margin-left: 16px;
+}
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled {
+    -webkit-text-fill-color: #d8d8d8 !important;
+}
+.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-disabled
+    .MuiOutlinedInput-notchedOutline {
+    border-color: #d8d8d8 !important;
+}
+icon {
+    color: red !important;
+    background-color: red !important;
+}
+
+.todoForm-checkbox {
+    margin-top: 4px !important;
+    color: green !important;
+}
