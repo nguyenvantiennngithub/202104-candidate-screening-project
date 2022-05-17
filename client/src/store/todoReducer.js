@@ -28,7 +28,6 @@ const todoReducer = (state, action) => {
         }
 
         case constants.clearCompletedTodo: {
-            console.log(action.payload);
             return {
                 ...state,
                 todos: state.todos.filter((item) => {

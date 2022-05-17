@@ -1,9 +1,7 @@
 import { Button } from "@mui/material";
 import React from "react";
-import { useDialog } from "../../hooks";
 import { useTodo } from "../../store/hooks";
 import TodoItem from "../TodoItem/TodoItem";
-import DialogConfirm from "./Dialog/DialogConfirm";
 import * as actionTodo from "../../store/todoAction";
 import * as apiTodo from "../../api/todo";
 import "./TodoList.css";
@@ -11,7 +9,6 @@ import "./TodoList.css";
 const TodoList = () => {
     const { state, dispatch } = useTodo();
 
-    const { isOpenDialog, handleOpenDialog, handleCloseDialog } = useDialog();
     const handleClearCompleted = async () => {
         const listCompletedId = state.todos.reduce((total, todo) => {
             if (todo.isCompleted) total.push(todo.id);
@@ -30,18 +27,19 @@ const TodoList = () => {
                 <Button
                     color="error"
                     variant="contained"
-                    onClick={handleOpenDialog}
+                    onClick={handleClearCompleted}
+                    id="clear-completed-todo"
                 >
                     Clear complated
                 </Button>
-                <DialogConfirm
+                {/* <DialogConfirm
                     isOpenDialog={isOpenDialog}
                     handleCloseDialog={handleCloseDialog}
                     handleClearCompleted={handleClearCompleted}
-                ></DialogConfirm>
+                ></DialogConfirm> */}
             </div>
             {state.todos.map((item, index) => {
-                return <TodoItem key={index} data={item}></TodoItem>;
+                return <TodoItem key={item.id} data={item}></TodoItem>;
             })}
         </div>
     );

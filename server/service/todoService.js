@@ -8,6 +8,7 @@ function addTodo(content, dueDate, isSetDueDate) {
         else sql = `insert into todo (content) values ('${content}')`;
         try {
             db.query(sql, function (err, results) {
+                if (!results) return res(0);
                 return res(results.insertId);
             });
         } catch (error) {
@@ -24,8 +25,8 @@ function getTodoById(idTask) {
 
         try {
             db.query(sql, function (err, results) {
-                if (results.length > 0) return res(results[0]);
-                return res(null);
+                if (!results || results.length === 0) return res(null);
+                return res(results[0]);
             });
         } catch (error) {
             console.log("ERROR getTodoById", error);
@@ -41,8 +42,8 @@ function getAllTodo() {
 
         try {
             db.query(sql, function (err, results) {
-                if (results.length > 0) return res(results);
-                return res([]);
+                if (!results || results.length === 0) return res([]);
+                return res(results);
             });
         } catch (error) {
             console.log("ERROR getTodoById", error);
@@ -56,6 +57,7 @@ function setCompletedTodo(id, isCompleted) {
 
         try {
             db.query(sql, function (err, results) {
+                if (!results) return res(false);
                 return res(results.affectedRows > 0);
             });
         } catch (error) {
@@ -70,7 +72,8 @@ function clearCompletedTodo(listCompletedId) {
 
         try {
             db.query(sql, function (err, results) {
-                return res(results.affectedRows > 0);
+                if (!results) return res(false);
+                res(results.affectedRows > 0);
             });
         } catch (error) {
             console.log("ERROR getTodoById", error);

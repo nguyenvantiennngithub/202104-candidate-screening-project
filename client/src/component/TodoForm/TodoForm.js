@@ -10,54 +10,51 @@ import { Checkbox } from "@mui/material";
 
 const TodoForm = () => {
     const [content, setContent] = useState("");
-    const [dueDate, setDueDate] = useState(null);
-    const [isSetDueDate, setIsSetDueDate] = useState(false);
+    const [dueDate, setDueDate] = useState();
+    const [isAlreadySetDueDate, setIsAlreadySetDueDate] = useState(false);
     const [contentMessageError, setContentMessageError] = useState("");
     const [dueDateMessageError, setDueDateMessageError] = useState("");
+    const [isCurrentDateIsDueDate, setIsCurrentDateIsDueDate] = useState(false);
     const { dispatch } = useTodo();
-    const dateTimeEle = useRef();
     const inputEle = useRef();
 
-    const handleChangeContent = (e) => {
-        if (contentMessageError && e.target.value.trim() !== "")
+    const handleChangeContent = (value) => {
+        if (contentMessageError && value.trim() !== "")
             setContentMessageError("");
-        setContent(e.target.value);
+        setContent(value);
     };
 
-    const handleChangeDate = (e) => {
+    const handleChangeDueDate = (dateChange) => {
         const now = new Date();
-        const dueDate = new Date(e.target.value);
+        const dueDate = new Date(dateChange);
 
         if (dueDateMessageError && dueDate) setDueDateMessageError("");
         setDueDate(dueDate);
-        if (dueDate.getTime() <= now.getTime()) {
-            dateTimeEle.current.classList.add("isDueDate");
-        } else {
-            dateTimeEle.current.classList.remove("isDueDate");
-        }
+        const temp = dueDate.getTime() <= now.getTime();
+        setIsCurrentDateIsDueDate(temp);
     };
     const handleClickCheckbox = () => {
-        setIsSetDueDate(!isSetDueDate);
+        setIsAlreadySetDueDate(!isAlreadySetDueDate);
     };
 
     const handleAddTask = async () => {
         if (content.trim() === "") {
             setContentMessageError("Can't add task because content is empty");
             return;
-        } else if (!dueDate && isSetDueDate) {
+        } else if (!dueDate && isAlreadySetDueDate) {
             setDueDateMessageError("Can't add task because due date not set");
             return;
         }
         const { data } = await api.addTodo({
             content,
             dueDate,
-            isSetDueDate,
+            isSetDueDate: isAlreadySetDueDate,
         });
         const { todo, status } = data;
         if (status === "success") {
-            dispatch(addTodo(todo));
             setContent("");
             inputEle.current.focus();
+            dispatch(addTodo(todo));
         }
     };
 
@@ -67,7 +64,9 @@ const TodoForm = () => {
                 <div>
                     <textarea
                         value={content}
-                        onChange={handleChangeContent}
+                        onChange={(e) => {
+                            handleChangeContent(e.target.value);
+                        }}
                         className="todoForm-content-input"
                         placeholder="Enter content"
                         ref={inputEle}
@@ -78,11 +77,13 @@ const TodoForm = () => {
                         id="datetime-local"
                         label="Due date"
                         type="datetime-local"
-                        defaultValue={null}
-                        className="todoForm-date"
-                        onChange={handleChangeDate}
-                        disabled={!isSetDueDate}
-                        ref={dateTimeEle}
+                        className={
+                            isCurrentDateIsDueDate
+                                ? "todoForm-date isDueDate"
+                                : "todoForm-date"
+                        }
+                        onChange={(e) => handleChangeDueDate(e.target.value)}
+                        disabled={!isAlreadySetDueDate}
                         sx={{
                             width: 250,
                         }}
@@ -94,7 +95,8 @@ const TodoForm = () => {
                         color="success"
                         className="todoForm-checkbox"
                         onClick={handleClickCheckbox}
-                        checked={isSetDueDate ? true : false}
+                        checked={isAlreadySetDueDate ? true : false}
+                        id="checkbox-setDueDate"
                     ></Checkbox>
                 </div>
             </div>
@@ -104,6 +106,7 @@ const TodoForm = () => {
                     size="medium"
                     color="success"
                     onClick={handleAddTask}
+                    id="button-submit"
                 >
                     Add
                 </Button>

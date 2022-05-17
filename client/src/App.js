@@ -14,6 +14,7 @@ const App = () => {
         }
         getAllTodo();
     }, [dispatch]);
+
     return (
         <div className="app">
             <div className="container">
