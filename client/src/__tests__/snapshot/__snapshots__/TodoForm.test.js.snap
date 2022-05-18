@@ -81,6 +81,7 @@ exports[`todo form add todo with check checkbox, has content, empty date 1`] = `
           checked={false}
           className="PrivateSwitchBase-input css-1m9pwf3"
           data-indeterminate={false}
+          id="checkbox-setDueDate"
           onChange={[Function]}
           type="checkbox"
         />
@@ -208,6 +209,7 @@ exports[`todo form add todo with check checkbox, has content, empty date 2`] = `
           checked={false}
           className="PrivateSwitchBase-input css-1m9pwf3"
           data-indeterminate={false}
+          id="checkbox-setDueDate"
           onChange={[Function]}
           type="checkbox"
         />
@@ -335,6 +337,7 @@ exports[`todo form add todo with check checkbox, has content, empty date 3`] = `
           checked={false}
           className="PrivateSwitchBase-input css-1m9pwf3"
           data-indeterminate={false}
+          id="checkbox-setDueDate"
           onChange={[Function]}
           type="checkbox"
         />
@@ -462,6 +465,7 @@ exports[`todo form add todo with check checkbox, has content, has date 1`] = `
           checked={false}
           className="PrivateSwitchBase-input css-1m9pwf3"
           data-indeterminate={false}
+          id="checkbox-setDueDate"
           onChange={[Function]}
           type="checkbox"
         />
@@ -589,6 +593,7 @@ exports[`todo form add todo with check checkbox, has content, has date 2`] = `
           checked={false}
           className="PrivateSwitchBase-input css-1m9pwf3"
           data-indeterminate={false}
+          id="checkbox-setDueDate"
           onChange={[Function]}
           type="checkbox"
         />
@@ -716,6 +721,7 @@ exports[`todo form add todo with check checkbox, has content, has date 3`] = `
           checked={false}
           className="PrivateSwitchBase-input css-1m9pwf3"
           data-indeterminate={false}
+          id="checkbox-setDueDate"
           onChange={[Function]}
           type="checkbox"
         />
@@ -843,6 +849,7 @@ exports[`todo form add todo with check checkbox, has content, has date 4`] = `
           checked={false}
           className="PrivateSwitchBase-input css-1m9pwf3"
           data-indeterminate={false}
+          id="checkbox-setDueDate"
           onChange={[Function]}
           type="checkbox"
         />
@@ -970,6 +977,7 @@ exports[`todo form add todo with content 1`] = `
           checked={false}
           className="PrivateSwitchBase-input css-1m9pwf3"
           data-indeterminate={false}
+          id="checkbox-setDueDate"
           onChange={[Function]}
           type="checkbox"
         />
@@ -1097,6 +1105,7 @@ exports[`todo form add todo with content 2`] = `
           checked={false}
           className="PrivateSwitchBase-input css-1m9pwf3"
           data-indeterminate={false}
+          id="checkbox-setDueDate"
           onChange={[Function]}
           type="checkbox"
         />
@@ -1224,6 +1233,7 @@ exports[`todo form add todo with content empty 1`] = `
           checked={false}
           className="PrivateSwitchBase-input css-1m9pwf3"
           data-indeterminate={false}
+          id="checkbox-setDueDate"
           onChange={[Function]}
           type="checkbox"
         />
@@ -1362,6 +1372,7 @@ exports[`todo form change or click onchange due date 1`] = `
           checked={false}
           className="PrivateSwitchBase-input css-1m9pwf3"
           data-indeterminate={false}
+          id="checkbox-setDueDate"
           onChange={[Function]}
           type="checkbox"
         />
@@ -1495,6 +1506,7 @@ exports[`todo form change or click onchange value of textarea 1`] = `
           checked={false}
           className="PrivateSwitchBase-input css-1m9pwf3"
           data-indeterminate={false}
+          id="checkbox-setDueDate"
           onChange={[Function]}
           type="checkbox"
         />
@@ -1628,6 +1640,7 @@ exports[`todo form change or click onclick checkbox 1`] = `
           checked={true}
           className="PrivateSwitchBase-input css-1m9pwf3"
           data-indeterminate={false}
+          id="checkbox-setDueDate"
           onChange={[Function]}
           type="checkbox"
         />
@@ -1761,6 +1774,7 @@ exports[`todo form normal case 1`] = `
           checked={false}
           className="PrivateSwitchBase-input css-1m9pwf3"
           data-indeterminate={false}
+          id="checkbox-setDueDate"
           onChange={[Function]}
           type="checkbox"
         />

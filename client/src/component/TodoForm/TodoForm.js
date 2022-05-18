@@ -53,7 +53,7 @@ const TodoForm = () => {
         const { todo, status } = data;
         if (status === "success") {
             setContent("");
-            inputEle.current.focus();
+            inputEle.current && inputEle.current.focus();
             dispatch(addTodo(todo));
         }
     };

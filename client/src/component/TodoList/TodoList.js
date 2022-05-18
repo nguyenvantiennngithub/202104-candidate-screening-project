@@ -32,13 +32,8 @@ const TodoList = () => {
                 >
                     Clear complated
                 </Button>
-                {/* <DialogConfirm
-                    isOpenDialog={isOpenDialog}
-                    handleCloseDialog={handleCloseDialog}
-                    handleClearCompleted={handleClearCompleted}
-                ></DialogConfirm> */}
             </div>
-            {state.todos.map((item, index) => {
+            {state.todos.map((item) => {
                 return <TodoItem key={item.id} data={item}></TodoItem>;
             })}
         </div>

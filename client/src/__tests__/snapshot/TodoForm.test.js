@@ -4,11 +4,7 @@ import renderer from "react-test-renderer";
 
 describe("todo form", () => {
     function createNodeMock(ele) {
-        if (ele.type === "input") {
-            return {
-                focus() {},
-            };
-        }
+        if (ele.type === "input") return { focus() {} };
         return null;
     }
     it("normal case", () => {
@@ -17,111 +13,96 @@ describe("todo form", () => {
                 <TodoForm></TodoForm>
             </Provider>
         );
-
-        const todoFormTree = todoForm.toJSON();
-        expect(todoFormTree).toMatchSnapshot();
+        expect(todoForm.toJSON()).toMatchSnapshot();
     });
 
     describe("change or click", () => {
-        it("onchange value of textarea", async () => {
+        it("onchange value of textarea", () => {
             const todoForm = renderer.create(
                 <Provider>
                     <TodoForm></TodoForm>
                 </Provider>
             );
 
-            const textAreaEle = await todoForm.root.findByType("textarea");
-            renderer.act(() => {
-                textAreaEle.props.onChange({ target: { value: "abc" } });
-            });
-
-            const todoFormTree = todoForm.toJSON();
-            expect(todoFormTree).toMatchSnapshot();
+            const textAreaEle = todoForm.root.findByType("textarea");
+            renderer.act(() =>
+                textAreaEle.props.onChange({ target: { value: "abc" } })
+            );
+            expect(todoForm.toJSON()).toMatchSnapshot();
         });
 
-        it("onclick checkbox", async () => {
+        it("onclick checkbox", () => {
             const todoForm = renderer.create(
                 <Provider>
                     <TodoForm></TodoForm>
                 </Provider>
             );
 
-            const checkBoxEle = await todoForm.root.findByProps({
+            const checkBoxEle = todoForm.root.findByProps({
                 className: "todoForm-checkbox",
             });
-            renderer.act(() => {
-                checkBoxEle.props.onClick();
-            });
-
-            const todoFormTree = todoForm.toJSON();
-            expect(todoFormTree).toMatchSnapshot();
+            renderer.act(() => checkBoxEle.props.onClick());
+            expect(todoForm.toJSON()).toMatchSnapshot();
         });
 
-        it("onchange due date", async () => {
+        it("onchange due date", () => {
             const todoForm = renderer.create(
                 <Provider>
                     <TodoForm></TodoForm>
                 </Provider>
             );
 
-            const dueDateEle = await todoForm.root.findByProps({
+            const dueDateEle = todoForm.root.findByProps({
                 id: "datetime-local",
             });
-            renderer.act(() => {
+            renderer.act(() =>
                 dueDateEle.props.onChange({
                     target: { value: "2022-05-13 06:06:00" },
-                });
-            });
-
-            const todoFormTree = todoForm.toJSON();
-            expect(todoFormTree).toMatchSnapshot();
+                })
+            );
+            expect(todoForm.toJSON()).toMatchSnapshot();
         });
     });
 
     describe("add todo", () => {
-        it("with content empty", async () => {
+        it("with content empty", () => {
             const todoForm = renderer.create(
                 <Provider>
                     <TodoForm></TodoForm>
                 </Provider>
             );
 
-            const dueDateEle = await todoForm.root.findByProps({
+            const dueDateEle = todoForm.root.findByProps({
                 id: "button-submit",
             });
-            renderer.act(() => {
-                dueDateEle.props.onClick();
-            });
+            renderer.act(() => dueDateEle.props.onClick());
+
+            expect(todoForm.toJSON()).toMatchSnapshot();
+        });
+
+        it("with content", () => {
+            const todoForm = renderer.create(
+                <Provider>
+                    <TodoForm></TodoForm>
+                </Provider>
+            );
 
             const todoFormTree = todoForm.toJSON();
+            const btnSubmitEle = todoForm.root.findByProps({
+                id: "button-submit",
+            });
+            const textAreaEle = todoForm.root.findByType("textarea");
+
+            renderer.act(() =>
+                textAreaEle.props.onChange({ target: { value: "abc" } })
+            );
+            expect(todoFormTree).toMatchSnapshot();
+
+            renderer.act(() => btnSubmitEle.props.onClick());
             expect(todoFormTree).toMatchSnapshot();
         });
 
-        it("with content", async () => {
-            const todoForm = renderer.create(
-                <Provider>
-                    <TodoForm></TodoForm>
-                </Provider>
-            );
-
-            const todoFormTree = todoForm.toJSON();
-            const btnSubmitEle = await todoForm.root.findByProps({
-                id: "button-submit",
-            });
-            const textAreaEle = await todoForm.root.findByType("textarea");
-
-            renderer.act(() => {
-                textAreaEle.props.onChange({ target: { value: "abc" } });
-            });
-            expect(todoFormTree).toMatchSnapshot();
-
-            renderer.act(() => {
-                btnSubmitEle.props.onClick();
-            });
-            expect(todoFormTree).toMatchSnapshot();
-        });
-
-        it("with check checkbox, has content, empty date", async () => {
+        it("with check checkbox, has content, empty date", () => {
             const todoForm = renderer.create(
                 <Provider>
                     <TodoForm></TodoForm>
@@ -129,69 +110,61 @@ describe("todo form", () => {
             );
             const todoFormTree = todoForm.toJSON();
 
-            const textAreaEle = await todoForm.root.findByType("textarea");
-            const btnSubmitEle = await todoForm.root.findByProps({
+            const textAreaEle = todoForm.root.findByType("textarea");
+            const btnSubmitEle = todoForm.root.findByProps({
                 id: "button-submit",
             });
-            const checkBoxEle = await todoForm.root.findByProps({
+            const checkBoxEle = todoForm.root.findByProps({
                 className: "todoForm-checkbox",
             });
 
-            renderer.act(() => {
-                textAreaEle.props.onChange({ target: { value: "abc" } });
-            });
+            renderer.act(() =>
+                textAreaEle.props.onChange({ target: { value: "abc" } })
+            );
             expect(todoFormTree).toMatchSnapshot();
 
-            renderer.act(() => {
-                checkBoxEle.props.onClick();
-            });
+            renderer.act(() => checkBoxEle.props.onClick());
             expect(todoFormTree).toMatchSnapshot();
 
-            renderer.act(() => {
-                btnSubmitEle.props.onClick();
-            });
+            renderer.act(() => btnSubmitEle.props.onClick());
             expect(todoFormTree).toMatchSnapshot();
         });
 
-        it("with check checkbox, has content, has date", async () => {
+        it("with check checkbox, has content, has date", () => {
             const todoForm = renderer.create(
                 <Provider>
                     <TodoForm></TodoForm>
                 </Provider>,
                 { createNodeMock }
             );
-            const textAreaEle = await todoForm.root.findByType("textarea");
-            const btnSubmitEle = await todoForm.root.findByProps({
+            const textAreaEle = todoForm.root.findByType("textarea");
+            const btnSubmitEle = todoForm.root.findByProps({
                 id: "button-submit",
             });
-            const checkBoxEle = await todoForm.root.findByProps({
+            const checkBoxEle = todoForm.root.findByProps({
                 className: "todoForm-checkbox",
             });
-            const dueDateEle = await todoForm.root.findByProps({
+            const dueDateEle = todoForm.root.findByProps({
                 id: "datetime-local",
             });
             const todoFormTree = todoForm.toJSON();
 
-            renderer.act(() => {
-                textAreaEle.props.onChange({ target: { value: "abc" } });
-            });
+            renderer.act(() =>
+                textAreaEle.props.onChange({ target: { value: "abc" } })
+            );
             expect(todoFormTree).toMatchSnapshot();
 
-            renderer.act(() => {
-                checkBoxEle.props.onClick();
-            });
+            renderer.act(() => checkBoxEle.props.onClick());
             expect(todoFormTree).toMatchSnapshot();
 
-            renderer.act(() => {
+            renderer.act(() =>
                 dueDateEle.props.onChange({
                     target: { value: "2022-05-13 06:06:00" },
-                });
-            });
+                })
+            );
             expect(todoFormTree).toMatchSnapshot();
 
-            renderer.act(() => {
-                btnSubmitEle.props.onClick();
-            });
+            renderer.act(() => btnSubmitEle.props.onClick());
             expect(todoFormTree).toMatchSnapshot();
         });
     });

@@ -1,4 +1,4 @@
-import { Selector } from "testcafe";
+import { fixture, Selector } from "testcafe";
 
 fixture`TodoItem`.page`http://localhost:3000/`;
 
@@ -11,7 +11,7 @@ const messageDueDateError = "Can't add task because due date not set";
 test("check the first unCheck checkbox", async (t) => {
     const countChecked = await Selector(queryChecked).count;
     const isExistUnChecked = await Selector(queryUnChecked).exists;
-    const countCheck = 1;
+    const countChange = 1;
 
     if (isExistUnChecked) {
         const firstCheckboxUnCheck = Selector(queryUnChecked).nth(0);
@@ -19,7 +19,7 @@ test("check the first unCheck checkbox", async (t) => {
         await t.click(firstCheckboxUnCheck);
         await t
             .expect(countChecked)
-            .eql((await Selector(queryChecked).count) - countCheck);
+            .eql((await Selector(queryChecked).count) - countChange);
     } else {
         console.log("add new todo, is not exist uncheck todo to testing");
     }
@@ -27,9 +27,9 @@ test("check the first unCheck checkbox", async (t) => {
 
 test("Check the second and third checked checkbox", async (t) => {
     const countChecked = await Selector(queryChecked).count;
-    const isExistChecked = (await Selector(queryChecked).count) >= 2;
-    const countCheck = 2;
-    if (isExistChecked) {
+    const isExist2Checked = (await Selector(queryChecked).count) >= 2;
+    const countChange = 2;
+    if (isExist2Checked) {
         const listUnchecked = Selector(queryChecked);
         const secondCheckboxUnCheck = listUnchecked.nth(1);
         const thirdCheckboxUnCheck = listUnchecked.nth(1);
@@ -37,7 +37,7 @@ test("Check the second and third checked checkbox", async (t) => {
         await t.click(secondCheckboxUnCheck).click(thirdCheckboxUnCheck);
         await t
             .expect(countChecked)
-            .eql((await Selector(queryChecked).count) + countCheck);
+            .eql((await Selector(queryChecked).count) + countChange);
     } else {
         console.log("is not exist 2 checked todo to testing");
     }
@@ -45,17 +45,17 @@ test("Check the second and third checked checkbox", async (t) => {
 
 test("check the first and second unCheck checkbox", async (t) => {
     const countChecked = await Selector(queryChecked).count;
-    const isExistUnChecked = (await Selector(queryUnChecked).count) >= 2;
-    const countCheck = 2;
+    const isExist2UnChecked = (await Selector(queryUnChecked).count) >= 2;
+    const countChange = 2;
 
-    if (isExistUnChecked) {
+    if (isExist2UnChecked) {
         const firstCheckboxUnCheck = Selector(queryUnChecked).nth(0);
         const secondCheckboxUnCheck = Selector(queryUnChecked).nth(0);
 
         await t.click(firstCheckboxUnCheck).click(secondCheckboxUnCheck);
         await t
             .expect(countChecked)
-            .eql((await Selector(queryChecked).count) - countCheck);
+            .eql((await Selector(queryChecked).count) - countChange);
     } else {
         console.log("is not exist 2 uncheck todo to testing");
     }
@@ -70,10 +70,10 @@ test("create new todo empty content, dont set due date (error)", async (t) => {
 
     await t
         .expect(await Selector(".todoForm-messageError").textContent)
-        .eql(messageContentError, "exist message error");
+        .eql(messageContentError, "is not exist message content error");
     await t
         .expect(countTodoList)
-        .eql(await Selector(queryAll).count, "dont change number of todo");
+        .eql(await Selector(queryAll).count, "change number of todo");
 });
 
 test("create new todo empty due date (error)", async (t) => {
@@ -88,7 +88,7 @@ test("create new todo empty due date (error)", async (t) => {
 
     await t
         .expect(await Selector(".todoForm-messageError").textContent)
-        .eql(messageDueDateError);
+        .eql(messageDueDateError, "is not exist message due date error");
     await t
         .expect(countTodoList)
         .eql(await Selector(queryAll).count, "dont change number of todo");
@@ -98,12 +98,13 @@ test("create new todo dont set due date", async (t) => {
     const textArea = Selector(".todoForm-content-input");
     const btnSubmit = Selector("#button-submit");
     const countTodoList = await Selector(queryAll).count;
+    const countChange = 1;
     await t.typeText(textArea, "Nguyen Van Tien").click(btnSubmit);
     await t
         .expect(countTodoList)
         .eql(
-            (await Selector(queryAll).count) - 1,
-            "dont change number of todo"
+            (await Selector(queryAll).count) - countChange,
+            "change number of todo"
         );
 });
 test("create new todo with content, due date", async (t) => {
@@ -112,6 +113,7 @@ test("create new todo with content, due date", async (t) => {
     const checkboxSetDueDate = Selector("#checkbox-setDueDate");
     const dueDate = Selector("#datetime-local");
     const countTodoList = await Selector(queryAll).count;
+    const countChange = 1;
     await t
         .typeText(textArea, "Nguyen Van Tien")
         .click(checkboxSetDueDate)
@@ -120,8 +122,8 @@ test("create new todo with content, due date", async (t) => {
     await t
         .expect(countTodoList)
         .eql(
-            (await Selector(queryAll).count) - 1,
-            "dont change number of todo"
+            (await Selector(queryAll).count) - countChange,
+            "change number of todo"
         );
 });
 test("create new todo with content, due date but dont check set due date", async (t) => {
@@ -129,6 +131,7 @@ test("create new todo with content, due date but dont check set due date", async
     const btnSubmit = Selector("#button-submit");
     const dueDate = Selector("#datetime-local");
     const countTodoList = await Selector(queryAll).count;
+    const countChange = 1;
     await t
         .typeText(textArea, "Nguyen Van Tien")
         .typeText(dueDate, "2013-03-18T13:00")
@@ -136,13 +139,15 @@ test("create new todo with content, due date but dont check set due date", async
     await t
         .expect(countTodoList)
         .eql(
-            (await Selector(queryAll).count) - 1,
-            "dont change number of todo"
+            (await Selector(queryAll).count) - countChange,
+            "change number of todo"
         );
 });
 test("clear completed todo", async (t) => {
     const btnClearCompleted = Selector("#clear-completed-todo");
 
     await t.click(btnClearCompleted);
-    await t.expect(await Selector(queryChecked).count).eql(0);
+    await t
+        .expect(await Selector(queryChecked).count)
+        .eql(0, "is exist completed todo after clear completed todo");
 });

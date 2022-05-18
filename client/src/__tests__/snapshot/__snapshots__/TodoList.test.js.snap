@@ -13,6 +13,7 @@ exports[`Todo list normal case 1`] = `
     <button
       className="MuiButton-root MuiButton-contained MuiButton-containedError MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-1sszw6i-MuiButtonBase-root-MuiButton-root"
       disabled={false}
+      id="clear-completed-todo"
       onBlur={[Function]}
       onClick={[Function]}
       onContextMenu={[Function]}

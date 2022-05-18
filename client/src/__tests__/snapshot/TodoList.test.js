@@ -10,7 +10,6 @@ describe("Todo list", () => {
             </Provider>
         );
 
-        const todoListTree = todoList.toJSON();
-        expect(todoListTree).toMatchSnapshot();
+        expect(todoList.toJSON()).toMatchSnapshot();
     });
 });

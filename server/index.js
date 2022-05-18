@@ -7,12 +7,7 @@ import router from "./routers/index.js";
 const app = express();
 const port = process.env.PORT || 8080;
 
-const corsOptions = {
-    exposedHeaders: "Authorization",
-};
-console.log(process.env.TZ);
-
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json({ extended: false, limit: "50mb" }));
 app.use(express.urlencoded({ extended: false }));
 

@@ -1,7 +1,7 @@
 import db from "../db/mysql.db.js";
 
 function addTodo(content, dueDate, isSetDueDate) {
-    return new Promise(async (res, rej) => {
+    return new Promise((res) => {
         let sql = "";
         if (isSetDueDate)
             sql = `insert into todo (content, dueDate) values ('${content}', '${dueDate}')`;
@@ -18,7 +18,7 @@ function addTodo(content, dueDate, isSetDueDate) {
 }
 
 function getTodoById(idTask) {
-    return new Promise(async (res, rej) => {
+    return new Promise((res) => {
         let sql =
             "select id, content, isCompleted, dueDate, created_at" +
             ` from todo where id= ${idTask}`;
@@ -35,7 +35,7 @@ function getTodoById(idTask) {
 }
 
 function getAllTodo() {
-    return new Promise(async (res, rej) => {
+    return new Promise((res) => {
         let sql =
             "select id, content, isCompleted, dueDate, created_at" +
             ` from todo where isClear=0`;
@@ -52,7 +52,7 @@ function getAllTodo() {
 }
 
 function setCompletedTodo(id, isCompleted) {
-    return new Promise(async (res, rej) => {
+    return new Promise((res) => {
         let sql = `update todo set isCompleted=${isCompleted} where id=${id}`;
 
         try {
@@ -67,7 +67,7 @@ function setCompletedTodo(id, isCompleted) {
 }
 
 function clearCompletedTodo(listCompletedId) {
-    return new Promise(async (res, rej) => {
+    return new Promise((res) => {
         let sql = `update todo set isClear=1 where id in (${listCompletedId})`;
 
         try {

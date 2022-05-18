@@ -19,6 +19,7 @@ exports[`app normal case 1`] = `
         <button
           className="MuiButton-root MuiButton-contained MuiButton-containedError MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-1sszw6i-MuiButtonBase-root-MuiButton-root"
           disabled={false}
+          id="clear-completed-todo"
           onBlur={[Function]}
           onClick={[Function]}
           onContextMenu={[Function]}
@@ -119,6 +120,7 @@ exports[`app normal case 1`] = `
               checked={false}
               className="PrivateSwitchBase-input css-1m9pwf3"
               data-indeterminate={false}
+              id="checkbox-setDueDate"
               onChange={[Function]}
               type="checkbox"
             />

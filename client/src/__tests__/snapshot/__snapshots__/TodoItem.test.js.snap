@@ -1,7 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`todo item props data is empty 1`] = `<div />`;
-
 exports[`todo item props data is undefined 1`] = `<div />`;
 
 exports[`todo item props data normal case 1`] = `
